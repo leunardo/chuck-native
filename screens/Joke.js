@@ -15,10 +15,13 @@ export default class Joke extends Component {
   }
 
   async componentDidMount() {
-    const req = await fetch(`https://api.chucknorris.io/jokes/random?category=${this.props.navigation.getParam('category')}`);
-    const joke = (await req.json()).value;
-    console.log(joke);
-    this.setState({ joke });
+    try {
+      const req = await fetch(`https://api.chucknorris.io/jokes/random?category=${this.props.navigation.getParam('category')}`);
+      const joke = (await req.json()).value;
+      this.setState({ joke });
+    } catch (error) {
+      console.error(error);      
+    }
   }
 
   render() {
